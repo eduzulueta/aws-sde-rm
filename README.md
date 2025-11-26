@@ -1,58 +1,55 @@
+## Lab 1: Kinesis Ingestion Stress Test
+**Objective:** Validate stream capacity and observe throttling behavior.
 
-# Welcome to your CDK Python project!
+**Experiment:**
+- Configured `week-1-lab-stream` with **1 Shard** (1MB/s or 1000 records/s limit).
+- Ran `producer.py` with batch size 500 and 0s sleep to force high throughput.
 
-This is a blank project for CDK development with Python.
-
-The `cdk.json` file tells the CDK Toolkit how to execute your app.
-
-This project is set up like a standard Python project.  The initialization
-process also creates a virtualenv within this project, stored under the `.venv`
-directory.  To create the virtualenv it assumes that there is a `python3`
-(or `python` for Windows) executable in your path with access to the `venv`
-package. If for any reason the automatic creation of the virtualenv fails,
-you can create the virtualenv manually.
-
-To manually create a virtualenv on MacOS and Linux:
-
-```
-$ python3 -m venv .venv
-```
-
-After the init process completes and the virtualenv is created, you can use the following
-step to activate your virtualenv.
-
-```
-$ source .venv/bin/activate
-```
-
-If you are a Windows platform, you would activate the virtualenv like this:
-
-```
-% .venv\Scripts\activate.bat
-```
-
-Once the virtualenv is activated, you can install the required dependencies.
-
-```
-$ pip install -r requirements.txt
-```
-
-At this point you can now synthesize the CloudFormation template for this code.
-
-```
-$ cdk synth
-```
-
-To add additional dependencies, for example other CDK libraries, just add
-them to your `setup.py` file and rerun the `pip install -r requirements.txt`
-command.
-
-## Useful commands
-
- * `cdk ls`          list all stacks in the app
- * `cdk synth`       emits the synthesized CloudFormation template
- * `cdk deploy`      deploy this stack to your default AWS account/region
- * `cdk diff`        compare deployed stack with current state
- * `cdk docs`        open CDK documentation
-
-Enjoy!
+**Outcome:**
+- Throttling confirmed after ~60 seconds.
+- Error Log:
+```text
+🚀 Starting STRESS TEST for stream: week-1-lab-stream
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+⚠️ SUCCESS! Throttling achieved: 500 records rejected.
+❌ Error Code: ProvisionedThroughputExceededException - Rate exceeded for shard shardId-000000000000 in stream week-1-lab-stream under account 637423431972.
+⚠️ SUCCESS! Throttling achieved: 500 records rejected.
+❌ Error Code: ProvisionedThroughputExceededException - Rate exceeded for shard shardId-000000000000 in stream week-1-lab-stream under account 637423431972.
+⚠️ SUCCESS! Throttling achieved: 500 records rejected.
+❌ Error Code: ProvisionedThroughputExceededException - Rate exceeded for shard shardId-000000000000 in stream week-1-lab-stream under account 637423431972.
+⚠️ SUCCESS! Throttling achieved: 500 records rejected.
+❌ Error Code: ProvisionedThroughputExceededException - Rate exceeded for shard shardId-000000000000 in stream week-1-lab-stream under account 637423431972.
+⚠️ SUCCESS! Throttling achieved: 500 records rejected.
+❌ Error Code: ProvisionedThroughputExceededException - Rate exceeded for shard shardId-000000000000 in stream week-1-lab-stream under account 637423431972.
+⚠️ SUCCESS! Throttling achieved: 500 records rejected.
+❌ Error Code: ProvisionedThroughputExceededException - Rate exceeded for shard shardId-000000000000 in stream week-1-lab-stream under account 637423431972.
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+✅ Batch of 500 sent. Still accepted. Pushing harder...
+⚠️ SUCCESS! Throttling achieved: 500 records rejected.
